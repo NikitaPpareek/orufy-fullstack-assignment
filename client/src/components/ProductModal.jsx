@@ -9,14 +9,31 @@ function ProductModal({
 }) {
   const [productName, setProductName] = useState("");
   const [productType, setProductType] = useState("");
+  const [brandName, setBrandName] = useState("");
+  const [mrp, setMrp] = useState("");
+  const [sellingPrice, setSellingPrice] = useState("");
+  const [quantityStock, setQuantityStock] =
+    useState("");
 
   useEffect(() => {
     if (selectedProduct) {
       setProductName(selectedProduct.productName);
       setProductType(selectedProduct.productType);
+      setBrandName(selectedProduct.brandName);
+      setMrp(selectedProduct.mrp);
+      setSellingPrice(
+        selectedProduct.sellingPrice
+      );
+      setQuantityStock(
+        selectedProduct.quantityStock
+      );
     } else {
       setProductName("");
       setProductType("");
+      setBrandName("");
+      setMrp("");
+      setSellingPrice("");
+      setQuantityStock("");
     }
   }, [selectedProduct, isOpen]);
 
@@ -24,32 +41,27 @@ function ProductModal({
 
   const handleSubmit = async () => {
     try {
+      const productData = {
+        productName,
+        productType,
+        brandName,
+        mrp,
+        sellingPrice,
+        quantityStock,
+        images: [],
+        exchangeEligible: false,
+      };
+
       if (selectedProduct) {
         await API.put(
           `/products/${selectedProduct._id}`,
-          {
-            productName,
-            productType,
-            quantityStock:
-              selectedProduct.quantityStock,
-            mrp: selectedProduct.mrp,
-            sellingPrice:
-              selectedProduct.sellingPrice,
-            brandName:
-              selectedProduct.brandName,
-          }
+          productData
         );
       } else {
-        await API.post("/products", {
-          productName,
-          productType,
-          quantityStock: 100,
-          mrp: 200,
-          sellingPrice: 150,
-          brandName: "Demo Brand",
-          images: [],
-          exchangeEligible: false,
-        });
+        await API.post(
+          "/products",
+          productData
+        );
       }
 
       fetchProducts();
@@ -133,66 +145,68 @@ function ProductModal({
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "18px",
+            gap: "16px",
           }}
         >
-          <div>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "8px",
-                color: "#334155",
-                fontWeight: "600",
-              }}
-            >
-              Product Name
-            </label>
+          <input
+            type="text"
+            placeholder="Product Name"
+            value={productName}
+            onChange={(e) =>
+              setProductName(e.target.value)
+            }
+            style={inputStyle}
+          />
 
-            <input
-              type="text"
-              value={productName}
-              onChange={(e) =>
-                setProductName(e.target.value)
-              }
-              placeholder="Enter product name"
-              style={{
-                width: "100%",
-                padding: "14px",
-                borderRadius: "12px",
-                border: "1px solid #CBD5E1",
-                outline: "none",
-              }}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Product Type"
+            value={productType}
+            onChange={(e) =>
+              setProductType(e.target.value)
+            }
+            style={inputStyle}
+          />
 
-          <div>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "8px",
-                color: "#334155",
-                fontWeight: "600",
-              }}
-            >
-              Product Type
-            </label>
+          <input
+            type="text"
+            placeholder="Brand Name"
+            value={brandName}
+            onChange={(e) =>
+              setBrandName(e.target.value)
+            }
+            style={inputStyle}
+          />
 
-            <input
-              type="text"
-              value={productType}
-              onChange={(e) =>
-                setProductType(e.target.value)
-              }
-              placeholder="Enter product type"
-              style={{
-                width: "100%",
-                padding: "14px",
-                borderRadius: "12px",
-                border: "1px solid #CBD5E1",
-                outline: "none",
-              }}
-            />
-          </div>
+          <input
+            type="number"
+            placeholder="MRP"
+            value={mrp}
+            onChange={(e) =>
+              setMrp(e.target.value)
+            }
+            style={inputStyle}
+          />
+
+          <input
+            type="number"
+            placeholder="Selling Price"
+            value={sellingPrice}
+            onChange={(e) =>
+              setSellingPrice(e.target.value)
+            }
+            style={inputStyle}
+          />
+
+          <input
+            type="number"
+            placeholder="Stock Quantity"
+            value={quantityStock}
+            onChange={(e) =>
+              setQuantityStock(e.target.value)
+            }
+            style={inputStyle}
+          />
         </div>
 
         {/* Footer */}
@@ -240,5 +254,13 @@ function ProductModal({
     </div>
   );
 }
+
+const inputStyle = {
+  width: "100%",
+  padding: "14px",
+  borderRadius: "12px",
+  border: "1px solid #CBD5E1",
+  outline: "none",
+};
 
 export default ProductModal;

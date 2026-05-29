@@ -1,7 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   const menuStyle = (path) => ({
     display: "flex",
@@ -9,20 +19,24 @@ function Sidebar() {
     padding: "14px 18px",
     borderRadius: "12px",
     textDecoration: "none",
-    color: "#E2E8F0",
+    color:
+      location.pathname === path
+        ? "#FFFFFF"
+        : "#CBD5E1",
     background:
       location.pathname === path
         ? "#7C3AED"
         : "transparent",
     transition: "0.3s",
-    fontWeight: "500",
+    fontWeight: "600",
+    fontSize: "15px",
   });
 
   return (
     <div
       style={{
         width: "280px",
-        minHeight: "100vh",
+        height: "100vh",
         background: "#0F172A",
         color: "white",
         display: "flex",
@@ -30,19 +44,38 @@ function Sidebar() {
         justifyContent: "space-between",
         padding: "30px 20px",
         boxSizing: "border-box",
+        position: "sticky",
+        top: 0,
       }}
     >
       {/* Top Section */}
       <div>
-        <h1
+        <div
           style={{
             marginBottom: "50px",
-            fontSize: "28px",
-            fontWeight: "700",
           }}
         >
-          📦 Productz
-        </h1>
+          <h1
+            style={{
+              margin: 0,
+              fontSize: "30px",
+              fontWeight: "700",
+              color: "#FFFFFF",
+            }}
+          >
+            📦 Products
+          </h1>
+
+          <p
+            style={{
+              color: "#94A3B8",
+              marginTop: "8px",
+              fontSize: "14px",
+            }}
+          >
+            Inventory Management
+          </p>
+        </div>
 
         <div
           style={{
@@ -51,15 +84,18 @@ function Sidebar() {
             gap: "12px",
           }}
         >
-          <Link to="/home" style={menuStyle("/home")}>
-            Dashboard
+          <Link
+            to="/home"
+            style={menuStyle("/home")}
+          >
+            📊 Dashboard
           </Link>
 
           <Link
             to="/products"
             style={menuStyle("/products")}
           >
-            Products
+            📦 Products
           </Link>
         </div>
       </div>
@@ -67,6 +103,7 @@ function Sidebar() {
       {/* Bottom Section */}
       <div>
         <button
+          onClick={handleLogout}
           style={{
             width: "100%",
             padding: "14px",
@@ -76,9 +113,11 @@ function Sidebar() {
             color: "#E2E8F0",
             cursor: "pointer",
             fontSize: "15px",
+            fontWeight: "600",
+            transition: "0.3s",
           }}
         >
-          Logout
+          🚪 Logout
         </button>
       </div>
     </div>

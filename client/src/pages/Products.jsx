@@ -87,63 +87,29 @@ function Products() {
             setOpenModal(true);
           }}
           style={{
-            background: "#7C3AED",
+            background:
+              "linear-gradient(135deg,#7C3AED,#9333EA)",
             color: "white",
             border: "none",
-            padding: "14px 24px",
-            borderRadius: "12px",
+            padding: "14px 28px",
+            borderRadius: "14px",
             cursor: "pointer",
-            fontWeight: "600",
+            fontWeight: "700",
             fontSize: "15px",
+            boxShadow:
+              "0 8px 20px rgba(124,58,237,0.25)",
           }}
         >
-          + Add Product
+          ➕ Add Product
         </button>
       </div>
 
-      {/* Filters Row */}
+      {/* Search */}
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "30px",
-          flexWrap: "wrap",
-          gap: "15px",
+          marginBottom: "20px",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            gap: "12px",
-          }}
-        >
-          <button
-            style={tabStyle("all")}
-            onClick={() => setActiveTab("all")}
-          >
-            All
-          </button>
-
-          <button
-            style={tabStyle("published")}
-            onClick={() =>
-              setActiveTab("published")
-            }
-          >
-            Published
-          </button>
-
-          <button
-            style={tabStyle("unpublished")}
-            onClick={() =>
-              setActiveTab("unpublished")
-            }
-          >
-            Unpublished
-          </button>
-        </div>
-
         <input
           type="text"
           placeholder="🔍 Search products..."
@@ -152,33 +118,95 @@ function Products() {
             setSearch(e.target.value)
           }
           style={{
-            width: "320px",
-            padding: "12px 16px",
-            borderRadius: "12px",
+            width: "400px",
+            padding: "14px 18px",
+            borderRadius: "14px",
             border: "1px solid #CBD5E1",
             outline: "none",
             background: "#FFFFFF",
+            fontSize: "15px",
           }}
         />
       </div>
 
-      {/* Cards */}
+      {/* Tabs */}
       <div
         style={{
           display: "flex",
-          flexWrap: "wrap",
-          gap: "24px",
+          gap: "12px",
+          marginBottom: "30px",
         }}
       >
-        {filteredProducts.map((product) => (
-          <ProductCard
-            key={product._id}
-            product={product}
-            fetchProducts={fetchProducts}
-            setSelectedProduct={setSelectedProduct}
-            setOpenModal={setOpenModal}
-          />
-        ))}
+        <button
+          style={tabStyle("all")}
+          onClick={() => setActiveTab("all")}
+        >
+          All
+        </button>
+
+        <button
+          style={tabStyle("published")}
+          onClick={() =>
+            setActiveTab("published")
+          }
+        >
+          Published
+        </button>
+
+        <button
+          style={tabStyle("unpublished")}
+          onClick={() =>
+            setActiveTab("unpublished")
+          }
+        >
+          Unpublished
+        </button>
+      </div>
+
+      {/* Product Cards */}
+      <div
+        style={{
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "24px",
+}}
+      >
+        {filteredProducts.length === 0 ? (
+          <div
+            style={{
+              width: "100%",
+              background: "#FFFFFF",
+              borderRadius: "20px",
+              padding: "60px",
+              textAlign: "center",
+              border: "1px solid #E2E8F0",
+            }}
+          >
+            <h2>No Products Found</h2>
+
+            <p
+              style={{
+                color: "#64748B",
+                marginTop: "10px",
+              }}
+            >
+              Click "Add Product" to create your
+              first product.
+            </p>
+          </div>
+        ) : (
+          filteredProducts.map((product) => (
+            <ProductCard
+              key={product._id}
+              product={product}
+              fetchProducts={fetchProducts}
+              setSelectedProduct={
+                setSelectedProduct
+              }
+              setOpenModal={setOpenModal}
+            />
+          ))
+        )}
       </div>
 
       <ProductModal

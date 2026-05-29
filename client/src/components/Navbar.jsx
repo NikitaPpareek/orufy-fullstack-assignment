@@ -2,7 +2,7 @@ function Navbar() {
   return (
     <div
       style={{
-        height: "80px",
+        height: "72px",
         background: "#FFFFFF",
         display: "flex",
         justifyContent: "space-between",
@@ -17,7 +17,7 @@ function Navbar() {
         <h2
           style={{
             margin: 0,
-            fontSize: "24px",
+            fontSize: "22px",
             color: "#0F172A",
             fontWeight: "700",
           }}
@@ -27,8 +27,8 @@ function Navbar() {
 
         <p
           style={{
-            margin: 0,
-            fontSize: "14px",
+            margin: "2px 0 0 0",
+            fontSize: "13px",
             color: "#64748B",
           }}
         >
@@ -41,24 +41,26 @@ function Navbar() {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "12px",
+          gap: "10px",
           background: "#F8FAFC",
-          padding: "10px 16px",
-          borderRadius: "12px",
+          padding: "8px 14px",
+          borderRadius: "14px",
           border: "1px solid #E2E8F0",
         }}
       >
         <div
           style={{
-            width: "40px",
-            height: "40px",
+            width: "36px",
+            height: "36px",
             borderRadius: "50%",
-            background: "#7C3AED",
+            background:
+              "linear-gradient(135deg,#7C3AED,#A855F7)",
             color: "white",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontWeight: "bold",
+            fontWeight: "700",
+            fontSize: "14px",
           }}
         >
           A
@@ -69,6 +71,8 @@ function Navbar() {
             style={{
               fontWeight: "600",
               color: "#0F172A",
+              fontSize: "14px",
+              lineHeight: "18px",
             }}
           >
             Admin
@@ -78,9 +82,10 @@ function Navbar() {
             style={{
               fontSize: "12px",
               color: "#64748B",
+              lineHeight: "16px",
             }}
           >
-            Administrator
+            Welcome back 👋
           </div>
         </div>
       </div>

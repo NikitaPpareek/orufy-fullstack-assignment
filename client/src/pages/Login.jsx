@@ -5,14 +5,22 @@ function Login() {
   const [mobile, setMobile] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (!mobile) {
-      alert("Please enter mobile number");
-      return;
-    }
+ const handleLogin = () => {
+  if (!mobile) {
+    alert("Please enter mobile number");
+    return;
+  }
 
-    navigate("/otp");
-  };
+  const generatedOtp = Math.floor(
+    1000 + Math.random() * 9000
+  ).toString();
+
+  localStorage.setItem("otp", generatedOtp);
+
+  alert(`Demo OTP: ${generatedOtp}`);
+
+  navigate("/otp");
+};
 
   return (
     <div
@@ -49,7 +57,7 @@ function Login() {
               marginBottom: "10px",
             }}
           >
-            Productz
+            Products
           </h1>
 
           <p

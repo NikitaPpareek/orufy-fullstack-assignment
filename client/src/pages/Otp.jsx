@@ -3,15 +3,36 @@ import { useNavigate } from "react-router-dom";
 
 function Otp() {
   const [otp, setOtp] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleVerify = () => {
-    if (otp.length < 4) {
-      alert("Please enter OTP");
+    const savedOtp = localStorage.getItem("otp");
+
+    if (!otp) {
+      setError("Please enter OTP");
       return;
     }
 
+    if (otp !== savedOtp) {
+      setError("Incorrect OTP");
+      return;
+    }
+
+    localStorage.removeItem("otp");
     navigate("/home");
+  };
+
+  const handleResendOtp = () => {
+    const generatedOtp = Math.floor(
+      1000 + Math.random() * 9000
+    ).toString();
+
+    localStorage.setItem("otp", generatedOtp);
+
+    alert(`New OTP: ${generatedOtp}`);
+
+    setError("");
   };
 
   return (
@@ -65,7 +86,10 @@ function Otp() {
           type="text"
           placeholder="Enter OTP"
           value={otp}
-          onChange={(e) => setOtp(e.target.value)}
+          onChange={(e) => {
+            setOtp(e.target.value);
+            setError("");
+          }}
           style={{
             width: "100%",
             padding: "14px",
@@ -77,6 +101,19 @@ function Otp() {
             letterSpacing: "6px",
           }}
         />
+
+        {error && (
+          <p
+            style={{
+              color: "#EF4444",
+              marginTop: "10px",
+              textAlign: "center",
+              fontWeight: "500",
+            }}
+          >
+            {error}
+          </p>
+        )}
 
         <button
           onClick={handleVerify}
@@ -97,6 +134,7 @@ function Otp() {
         </button>
 
         <button
+          onClick={handleResendOtp}
           style={{
             width: "100%",
             marginTop: "12px",
