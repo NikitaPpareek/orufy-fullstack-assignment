@@ -1,5 +1,12 @@
-Live Project Link : https://orufy-fullstack-assignment-gray.vercel.app/
 # Orufy Full Stack Assignment
+
+## Live Demo
+
+Frontend: https://your-vercel-url.vercel.app
+
+Backend: https://orufy-backend-lt72.onrender.com
+
+GitHub: https://github.com/NikitaPpareek/orufy-fullstack-assignment
 
 ## Product Management Dashboard
 
