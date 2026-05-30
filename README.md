@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-Frontend: https://your-vercel-url.vercel.app
+Frontend: https://orufy-fullstack-assignment-gray.vercel.app/
 
 Backend: https://orufy-backend-lt72.onrender.com
 
