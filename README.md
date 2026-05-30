@@ -42,6 +42,22 @@ A full-stack product management dashboard built using the MERN stack. The applic
 
 ---
 
+## Screenshots
+
+### Login Page
+![Login Page](./ScreenShots/OTP.png)
+
+### Dashboard
+![Dashboard](./ScreenShots/Dashboard.png)
+
+### Products Page
+![Products Page](./ScreenShots/AllProduct.png)
+
+### AddProduct Page
+![Products Page](./ScreenShots/AddProd.png)
+
+
+
 ## Tech Stack
 
 ### Frontend
